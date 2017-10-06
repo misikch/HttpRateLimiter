@@ -1,0 +1,24 @@
+{
+    "name": "misikch/HttpRateLimiter",
+    "description": "limit http requests",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey Maslovskiy",
+            "email": "misikch@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload":{
+        "psr-4":{
+            "src\\":"RateLimiter",
+            "Tests\\":"tests"
+        }
+    },
+    "require-dev": {
+        "codeception/codeception": "2.3.5"
+    }
+}

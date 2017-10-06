@@ -1,0 +1,15 @@
+paths:
+    tests: tests
+    output: tests/_output
+    data: tests/_data
+    support: tests/_support
+    envs: tests/_envs
+actor_suffix: Tester
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+settings:
+    # name of bootstrap that will be used
+    # each bootstrap file should be
+    # inside a suite directory.
+    bootstrap: _bootstrap.php
