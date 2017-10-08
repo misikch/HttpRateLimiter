@@ -44,7 +44,7 @@ class RateLimiter
         $this->ttl = $this->period;
     }
 
-    public function getAllow($id): int
+    public function getAllow(string $id): int
     {
         $allowKey = $this->keyAllow($id);
         if ($this->storage->has($allowKey)) {
@@ -54,7 +54,7 @@ class RateLimiter
         return $this->maxRequests;
     }
 
-    public function keyAllow($id): string
+    public function keyAllow(string $id): string
     {
         return $this->name . ":" . $id . ":allow";
     }
@@ -65,7 +65,7 @@ class RateLimiter
      * @param string $id
      * @return bool
      */
-    public function check($id): bool
+    public function check(string $id): bool
     {
         $timeKey = $this->keyTime($id);
         $allowKey = $this->keyAllow($id);
@@ -91,7 +91,7 @@ class RateLimiter
         return true;
     }
 
-    public function keyTime($id): string
+    public function keyTime(string $id): string
     {
         return $this->name . ":" . $id . ":time";
     }
@@ -100,7 +100,7 @@ class RateLimiter
      * Purge rate limit record for $id
      * @param string $id
      */
-    public function purge($id)
+    public function purge(string $id)
     {
         $this->storage->del($this->keyTime($id));
         $this->storage->del($this->keyAllow($id));

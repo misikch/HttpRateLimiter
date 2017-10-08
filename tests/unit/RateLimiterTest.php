@@ -46,6 +46,21 @@ class RateLimiterTest extends \Codeception\Test\Unit
         $this->tester->assertTrue($rateLimiter->check($id));
     }
 
+    public function testMethodGetAllow() {
+        $rateLimiter = new RateLimiter($this->getMemoryStorage(), 'default', 5, 3);
+
+        $id = '127.0.0.1';
+
+        $res = $rateLimiter->getAllow($id);
+
+        $this->tester->assertEquals(5, $res);
+
+        $rateLimiter->check($id);
+        $res = $rateLimiter->getAllow($id);
+
+        $this->tester->assertEquals(4, $res);
+    }
+
 
 
     private function getMemoryStorage(): StorageInterface
