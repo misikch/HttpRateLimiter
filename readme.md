@@ -57,5 +57,4 @@ class HttpRateLimitMiddleware extends Middleware {
 ```
 
 ## Run tests:
-* `wget http://codeception.com/codecept.phar`
-* `php codecept.phar run`
+* `vendor/bin/codecept run`
