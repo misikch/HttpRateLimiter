@@ -26,7 +26,24 @@ class RateLimiterTest extends \Codeception\Test\Unit
     {
         $rateLimiter = new RateLimiter($this->getMemoryStorage(), 'default', 5, 60);
 
-        $this->tester->assertInstanceOf($rateLimiter, RateLimiter::class);
+        $this->tester->assertInstanceOf(RateLimiter::class, $rateLimiter);
+    }
+
+    public function testMethodCheckSuccessful1() {
+        $rateLimiter = new RateLimiter($this->getMemoryStorage(), 'default', 5, 3);
+
+        $id = '127.0.0.1';
+
+        for ($i=1;$i<=5;$i++) {
+            //five requests passed OK
+            $this->tester->assertTrue($rateLimiter->check($id));
+        }
+        //6 request out of limit
+        $this->tester->assertFalse($rateLimiter->check($id));
+
+        sleep(4);
+        //reset. New period, new request limit.
+        $this->tester->assertTrue($rateLimiter->check($id));
     }
 
 
@@ -62,7 +79,7 @@ class RateLimiterTest extends \Codeception\Test\Unit
 
             public function has(string $key): bool
             {
-                return array_key_exists($key, $this->memory) && $this->memory[$key]['ttl'] <= time();
+                return array_key_exists($key, $this->memory) && $this->memory[$key]['ttl'] >= time();
             }
 
             public function del(string $key): bool
