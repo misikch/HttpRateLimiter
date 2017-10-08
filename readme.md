@@ -3,7 +3,7 @@
 ### Status
 [![Build Status](https://travis-ci.org/misikch/combine-products-php.svg?branch=master)](https://travis-ci.org/misikch/combine-products-php)
 
-## Требования
+## Requirements
 
 * PHP >= 7.0
 
@@ -48,7 +48,7 @@ class HttpRateLimitMiddleware extends Middleware {
         }
 
         $response->setHeader('X-HTTP-RATELIMIT', $this->rateLimiter->getMaxRequests());
-        $response->setHeader('X-HTTP-RATELIMIT-REMAINING', $this->rateLimiter->getAllow($ip));
+        $response->setHeader('X-HTTP-RATELIMIT-REMAINING', 0);
         $response->setStatusCode(429, 'Too many requests');
         $response->send();
         die();
