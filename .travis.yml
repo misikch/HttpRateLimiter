@@ -1,0 +1,15 @@
+# Travis CI configuration file.
+
+language: php
+
+php:
+    - 7.0
+    - 7.1
+
+before_script:
+    # Install Codeception.
+    # Doing this last gives the webdriver and server time to start up.
+    - composer install
+
+script:
+    - vendor/bin/codecept run
