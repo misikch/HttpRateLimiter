@@ -96,12 +96,6 @@ class RateLimiter
         return $this->name . ":" . $id . ":time";
     }
 
-    protected function initCounter(string $id)
-    {
-        $this->storage->set($this->keyTime($id), time(), $this->ttl);
-        $this->storage->set($this->keyAllow($id), $this->maxRequests - 1, $this->ttl);
-    }
-
     /**
      * Purge rate limit record for $id
      * @param string $id
@@ -111,4 +105,17 @@ class RateLimiter
         $this->storage->del($this->keyTime($id));
         $this->storage->del($this->keyAllow($id));
     }
+
+    public function getMaxRequests(): int
+    {
+        return $this->maxRequests;
+    }
+
+    protected function initCounter(string $id)
+    {
+        $this->storage->set($this->keyTime($id), time(), $this->ttl);
+        $this->storage->set($this->keyAllow($id), $this->maxRequests - 1, $this->ttl);
+    }
+
+
 }
