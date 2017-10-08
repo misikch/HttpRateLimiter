@@ -9,7 +9,7 @@
 
 ## Example:
 
-Configure RateLimiter oject:
+Configure RateLimiter object:
 
 ```php
 /**
