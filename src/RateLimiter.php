@@ -71,9 +71,7 @@ class RateLimiter
         $allowKey = $this->keyAllow($id);
 
         if ($this->storage->has($timeKey)) {
-            $currentTime = time();
-
-            $timePassed = $currentTime - $this->storage->get($timeKey);
+            $timePassed = time() - $this->storage->get($timeKey);
             $allow = $this->storage->get($allowKey);
             $allow--;
 
@@ -87,7 +85,9 @@ class RateLimiter
             }
         }
 
-        $this->initCounter($id);
+        //init new counter
+        $this->storage->set($this->keyTime($id), time(), $this->ttl);
+        $this->storage->set($this->keyAllow($id), $this->maxRequests - 1, $this->ttl);
         return true;
     }
 
@@ -110,12 +110,5 @@ class RateLimiter
     {
         return $this->maxRequests;
     }
-
-    protected function initCounter(string $id)
-    {
-        $this->storage->set($this->keyTime($id), time(), $this->ttl);
-        $this->storage->set($this->keyAllow($id), $this->maxRequests - 1, $this->ttl);
-    }
-
 
 }
