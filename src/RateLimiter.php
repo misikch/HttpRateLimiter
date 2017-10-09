@@ -54,11 +54,6 @@ class RateLimiter
         return $this->maxRequests;
     }
 
-    public function keyAllow(string $id): string
-    {
-        return $this->name . ":" . $id . ":allow";
-    }
-
     /**
      * Rate Limiting
      *
@@ -94,6 +89,11 @@ class RateLimiter
     public function keyTime(string $id): string
     {
         return $this->name . ":" . $id . ":time";
+    }
+
+    public function keyAllow(string $id): string
+    {
+        return $this->name . ":" . $id . ":allow";
     }
 
     /**
