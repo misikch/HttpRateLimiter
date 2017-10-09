@@ -1,7 +1,7 @@
 # HTTP Request Limiter
 
 ### Status
-[![Build Status](https://travis-ci.org/misikch/HttpRateLimiter.svg?branch=master)](https://travis-ci.org/misikch/combine-products-php)
+[![Build Status](https://travis-ci.org/misikch/HttpRateLimiter.svg?branch=master)](https://travis-ci.org/misikch/HttpRateLimiter)
 
 ## Requirements
 
