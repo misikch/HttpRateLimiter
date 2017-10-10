@@ -36,7 +36,7 @@ class HttpRateLimitMiddleware extends Middleware {
         $this->rateLimiter = $rateLimiter;
     }
 
-    public function __invoke(HttpRequest $request, HttpResponse $response)
+    public function __invoke(HttpRequest $request, HttpResponse $response, callable $next)
     {
         $ip = $request->getClientIp();
 
@@ -44,7 +44,7 @@ class HttpRateLimitMiddleware extends Middleware {
             $response->setHeader('X-HTTP-RATELIMIT', $this->rateLimiter->getMaxRequests());
             $response->setHeader('X-HTTP-RATELIMIT-REMAINING', $this->rateLimiter->getAllow($ip));
 
-            return $response;
+            return $next($request, $response);
         }
 
         $response->setHeader('X-HTTP-RATELIMIT', $this->rateLimiter->getMaxRequests());
