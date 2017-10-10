@@ -24,7 +24,7 @@ $app->getContainer()->add('httpRateLimiter', function() use ($config) {
 
 Use it in Middleware (for example):
 ```php
-class HttpRateLimitMiddleware extends Middleware {
+class HttpRateLimitMiddleware implements MiddlewareInterface {
 
     /**
      * @var \RateLimiter\RateLimiter
